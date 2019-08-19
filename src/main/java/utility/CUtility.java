@@ -16,6 +16,17 @@ public class CUtility implements IUtility
         m_gamma = p_gamma;
     }
 
+    public Boolean even( final Integer p_number )
+    {
+        if ( p_number % 2 == 0 ) return true;
+        return false;
+    }
+
+    public Boolean odd( final Integer p_number )
+    {
+        if ( p_number % 2 == 1 ) return true;
+        return false;
+    }
 
     @Override
     public Double calculate( final IParameter p_parameter )
