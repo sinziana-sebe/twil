@@ -5,21 +5,27 @@ package utility;
  */
 public class CUtility implements IUtility
 {
-    private final Double m_alpha;
-    private final Double m_beta;
-    private final Double m_gamma;
+    private final ICoefficient m_coefficient;
+    private final IParameter m_parameter;
+
+
+    public CUtility( final ICoefficient p_coefficient, final CParameter p_parameter )
+    {
+        m_coefficient = p_coefficient;
+        m_parameter = p_parameter;
+    }
 
     /**
-     * ctor
-     * @param p_alpha alpha
-     * @param p_beta beta
-     * @param p_gamma gamma
+     * calculates the utility value
+     * @return utility value
      */
-    public CUtility( final Double p_alpha, final Double p_beta, final Double p_gamma )
+    @Override
+    public Double calculate()
     {
-        m_alpha = p_alpha;
-        m_beta = p_beta;
-        m_gamma = p_gamma;
+        final Double l_first = m_coefficient.alpha() * m_parameter.getFirst();
+        final Double l_second = m_coefficient.beta() * m_parameter.getSecond();
+        final Double l_third = m_coefficient.gamma() * m_parameter.getThird();
+        return  l_first + l_second + l_third;
     }
 
     /**
@@ -44,27 +50,5 @@ public class CUtility implements IUtility
         return false;
     }
 
-    /**
-     * calculates the utility value based on Parameter object
-     * @param p_parameter parameter object
-     * @return utility value
-     */
-    @Override
-    public Double calculate( final IParameter p_parameter )
-    {
-        return m_alpha * p_parameter.getFirst() + m_beta * p_parameter.getSecond() + m_gamma * p_parameter.getThird();
-    }
 
-    /**
-     * calculates utility value based on Doubles
-     * @param p_first first parameter
-     * @param p_second second parameter
-     * @param p_third third parameter
-     * @return utility function value
-     */
-    @Override
-    public Double calculate( final Double p_first, final Double p_second, final Double p_third )
-    {
-        return m_alpha * p_first + m_beta * p_second + m_gamma * p_third;
-    }
 }
